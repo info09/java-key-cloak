@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "a9d44247-2b92-4780-90a4-1bbda6ca13fa",
+		"name": "KeyCloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17837310"
+	},
+	"item": [
+		{
+			"name": "discovery Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/realms/huytq/.well-known/openid-configuration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"realms",
+						"huytq",
+						".well-known",
+						"openid-configuration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exchange Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.environment.set(\"token\", data.access_token)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "learning_app",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "4Rl99nIrwJKnoxqflbXgZBexzSuHIXdE",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "huytq",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Admin@123$",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8181/realms/huytq/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"realms",
+						"huytq",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get UserInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/realms/huytq/protocol/openid-connect/userinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"realms",
+						"huytq",
+						"protocol",
+						"openid-connect",
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

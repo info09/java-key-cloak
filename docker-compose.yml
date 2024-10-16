@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  #database section
+  keycloak-mysql:
+    image: mysql:8.3.0
+
+  keycloak:
+    image: keycloak/keycloak:25.0
+
+#network section
+networks:
+  default:
+    name: identity-service-network
+    driver: bridge
+
+#volumes sections
+volumes:
+  mysql_keycloak_data:
+    name: mysql_keycloak_data
+  keycloak_realms:
+    name: keycloak_realms
