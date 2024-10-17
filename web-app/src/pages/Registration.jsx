@@ -36,7 +36,7 @@ export default function Registration() {
 
     try {
       const data = {
-        userName: username,
+        username: username,
         password: password,
         firstName: firstname,
         lastName: lastname,

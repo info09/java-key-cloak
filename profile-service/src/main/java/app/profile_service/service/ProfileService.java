@@ -6,6 +6,8 @@ import app.profile_service.dto.identity.UserCreationParam;
 import app.profile_service.dto.request.RegistrationRequest;
 import app.profile_service.dto.response.ProfileResponse;
 import app.profile_service.entity.Profile;
+import app.profile_service.exception.AppException;
+import app.profile_service.exception.ErrorCode;
 import app.profile_service.exception.ErrorNormalizer;
 import app.profile_service.repository.IdentityClient;
 import app.profile_service.repository.ProfileRepository;
@@ -15,6 +17,7 @@ import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -110,5 +113,21 @@ public class ProfileService {
             }
         }
         return null;
+    }
+
+    public ProfileResponse getMyProfile() {
+        var context = SecurityContextHolder.getContext().getAuthentication();
+        var userId = context.getName();
+        var profile = profileRepository.findByUserId(userId).orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_EXISTED));
+
+        return ProfileResponse.builder()
+                .profileId(profile.getProfileId())
+                .userId(profile.getUserId())
+                .email(profile.getEmail())
+                .username(profile.getUserName())
+                .firstName(profile.getFirstName())
+                .lastName(profile.getLastName())
+                .dob(profile.getDob())
+                .build();
     }
 }

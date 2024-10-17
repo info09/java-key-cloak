@@ -6557,6 +6557,11 @@ jsonpointer@^5.0.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+keycloak-js@^26.0.0:
+  version "26.0.0"
+  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-26.0.0.tgz#2c14fdd2e86a6b4bdb1cbff43b6e0e6a5ae4d715"
+  integrity sha512-uUvoc6luDuAOQ74i4/wKm1tGduYcJ/2jSh29Krekkt+ytn1mLL+mHug27FfpwgxcTb6yx+uL0OcehXwl3WIRMQ==
+
 keyv@^4.5.3:
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.4.tgz#a879a99e29452f942439f2a405e3af8b31d4de93"
