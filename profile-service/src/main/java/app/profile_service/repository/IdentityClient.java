@@ -17,5 +17,5 @@ public interface IdentityClient {
     TokenExchangeResponse exchangeTokenClient(@QueryMap TokenExchangeParam param);
 
     @PostMapping(value = "/admin/realms/huytq/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<?> createUser(@RequestHeader("Authorization") String token, @RequestBody UserCreationParam param);
+    ResponseEntity<Void> createUser(@RequestHeader("Authorization") String token, @RequestBody UserCreationParam param);
 }
